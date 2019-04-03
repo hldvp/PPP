@@ -17,19 +17,20 @@ buildscript {
         androidSDKVersion = json.androidSDKVersion
         androidGradleToolsVersion = json.androidGradleToolVersion
         gwtVersion = json.gwtVersion
-        gwtGradleVersion = json.gwtPluginVersion
+        gwtGradleVersion = "0.6"//json.gwtPluginVersion
     }
     
     repositories {
         jcenter()
         mavenCentral()
         maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
+        maven { url 'http://dl.bintray.com/steffenschaefer/maven' }
     }
     
     dependencies {
         classpath "de.richsource.gradle.plugins:gwt-gradle-plugin:$gwtGradleVersion"
-        classpath "com.android.tools.build:gradle:$androidGradleToolsVersion"
-        classpath "com.mobidevelop.robovm:robovm-gradle-plugin:$roboVMGradleVersion"
+//        classpath "com.android.tools.build:gradle:$androidGradleToolsVersion"
+//        classpath "com.mobidevelop.robovm:robovm-gradle-plugin:$roboVMGradleVersion"
     }
 }
 
@@ -67,19 +68,19 @@ project(":desktop") {
     }
 }
 
-project(":android") {
-    apply plugin: "android"
-
-    configurations { natives }
-
-    dependencies {
-        compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"        
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
-        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
-    }
-}
+//project(":android") {
+//    apply plugin: "android"
+//
+//    configurations { natives }
+//
+//    dependencies {
+//        compile project(":core")
+//        compile "com.badlogicgames.gdx:gdx-backend-android:$gdxVersion"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-x86"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi"
+//        natives "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-armeabi-v7a"
+//    }
+//}
 
 project(":html") {
     apply plugin: "gwt"
@@ -94,18 +95,18 @@ project(":html") {
     }    
 }
 
-project(":ios") {
-    apply plugin: 'java'
-    apply plugin: 'robovm'
-
-    dependencies {
-        compile "com.mobidevelop.robovm:robovm-rt:${roboVMVersion}"
-        compile "com.mobidevelop.robovm:robovm-cocoatouch:${roboVMVersion}"
-        compile project(":core")
-        compile "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion"
-        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
-    }
-}
+//project(":ios") {
+//    apply plugin: 'java'
+//    apply plugin: 'robovm'
+//
+//    dependencies {
+//        compile "com.mobidevelop.robovm:robovm-rt:${roboVMVersion}"
+//        compile "com.mobidevelop.robovm:robovm-cocoatouch:${roboVMVersion}"
+//        compile project(":core")
+//        compile "com.badlogicgames.gdx:gdx-backend-robovm:$gdxVersion"
+//        compile "com.badlogicgames.gdx:gdx-platform:$gdxVersion:natives-ios"
+//    }
+//}
 
 
 tasks.eclipse.doLast {
